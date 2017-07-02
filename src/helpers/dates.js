@@ -1,7 +1,16 @@
 const DATE_SCALE_RE = /mins|hours|days/;
 const BASE_TIME = 60 * 1000;
 
-const getTime = (date) => {
+const internals = {};
+
+/**
+ * Parse time to milliseconds
+ *
+ * @param {string} date - date string
+ * @returns {undefined|number} undefined if time is not a number | time in milliseconds
+ * @private
+ */
+internals.parseTimeToMilliseconds = (date) => {
   const dateScale = date.match(DATE_SCALE_RE)[0] || 'mins';
   const time = date.replace(DATE_SCALE_RE, '').trim();
   const timeNumber = parseInt(time, 10);
@@ -28,6 +37,13 @@ const getTime = (date) => {
   return expiresTime;
 };
 
+/**
+ * Parse time to
+ *
+ * @param {string} date - date string
+ * @returns {undefined|number} undefined if date passed is not a string | time in milliseconds
+ * @public
+ */
 const parseDate = (date) => {
 
   if (typeof(date) !== 'string'){
@@ -35,7 +51,10 @@ const parseDate = (date) => {
     return;
   }
 
-  return getTime(date);
+  return internals.parseTimeToMilliseconds(date);
 };
 
-export default parseDate;
+export {
+  internals as __internals__,
+  parseDate as default
+};
