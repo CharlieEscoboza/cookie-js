@@ -1,4 +1,4 @@
-const DATE_SCALE_RE = /mins|hours|days/;
+const DATE_SCALE_RE = /(min|hour|day)s?/;
 const BASE_TIME = 60 * 1000;
 
 const internals = {};
