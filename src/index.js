@@ -1,8 +1,19 @@
 import isBrowser from './helpers/browser';
 import parseDate from './helpers/dates';
 
+/**
+ * Cookie Class
+ */
 export default class Cookie {
 
+  /**
+   * Set a cookie
+   *
+   * @param {string} name - cookie name
+   * @param {string|boolean|number} value - value the cookie should hold
+   * @param {string} path - path to apply the cookie
+   * @param {string} expires - date when the cookie should expire. i.e.: 1 min | 1 hour | 1 day
+   */
   static set({
     name,
     value = 0,
@@ -33,6 +44,12 @@ export default class Cookie {
     document.cookie = cookie;
   }
 
+  /**
+   * Get cookie value
+   *
+   * @param {string} name - cookie name
+   * @returns {undefined|string} undefined if the code is not execute in a browser | string with the cookie value
+   */
   static get(name) {
 
     if (!isBrowser()) {
@@ -52,7 +69,13 @@ export default class Cookie {
     return cookiesObject[name] || '';
   }
 
-  static delete(name) {
+  /**
+   * Remove a cookie
+   *
+   * @param {string} name - cookie name
+   * @returns {undefined} undefined
+   */
+  static remove(name) {
 
     if (!isBrowser()) {
       console.warn('Cannot delete a cookie in a no client environment');
