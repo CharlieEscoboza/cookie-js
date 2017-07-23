@@ -5,7 +5,6 @@ import parseDate from './helpers/dates';
  * Cookie Class
  */
 export default class Cookie {
-
   /**
    * Set a cookie
    *
@@ -19,15 +18,14 @@ export default class Cookie {
     value = 0,
     path,
     expires
-             }) {
-
+  }) {
     if (!isBrowser()) {
-      console.warn('Cannot set a cookie in a no client environment');
+      console.warn('Cannot set a cookie in a no client environment'); // eslint-disable-line no-console
       return;
     }
 
     if (!name) {
-      console.warn('Cannot set a cookie without name');
+      console.warn('Cannot set a cookie without name'); // eslint-disable-line no-console
       return;
     }
 
@@ -41,23 +39,22 @@ export default class Cookie {
       cookie += `expires=${parseDate(expires)}`;
     }
 
-    document.cookie = cookie;
+    document.cookie = cookie; // eslint-disable-line no-undef
   }
 
   /**
    * Get cookie value
    *
    * @param {string} name - cookie name
-   * @returns {undefined|string} undefined if the code is not execute in a browser | string with the cookie value
+   * @returns {null|string} null if code is not execute in a browser | string with the cookie value
    */
   static get(name) {
-
     if (!isBrowser()) {
-      console.warn('Cannot set a cookie in a no client environment');
-      return;
+      console.warn('Cannot set a cookie in a no client environment'); // eslint-disable-line no-console
+      return null;
     }
 
-    const cookies = document.cookie || '';
+    const cookies = document.cookie || ''; // eslint-disable-line no-undef
     const cookiesArray = cookies.split(';');
     const cookiesObject = cookiesArray.reduce((acc, curr) => {
       const key = curr.split('=')[0];
@@ -76,9 +73,8 @@ export default class Cookie {
    * @returns {undefined} undefined
    */
   static remove(name) {
-
     if (!isBrowser()) {
-      console.warn('Cannot delete a cookie in a no client environment');
+      console.warn('Cannot delete a cookie in a no client environment'); // eslint-disable-line no-console
       return;
     }
 

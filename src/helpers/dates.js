@@ -7,7 +7,7 @@ const internals = {};
  * Parse time to milliseconds
  *
  * @param {string} date - date string
- * @returns {undefined|number} undefined if time is not a number | time in milliseconds
+ * @returns {null|number} null if time is not a number | time in milliseconds
  * @private
  */
 internals.parseTimeToMilliseconds = (date) => {
@@ -16,8 +16,8 @@ internals.parseTimeToMilliseconds = (date) => {
   const timeNumber = parseInt(time, 10);
 
   if (isNaN(time)) {
-    console.error('Time provided is not a number');
-    return;
+    console.error('Time provided is not a number'); // eslint-disable-line no-console
+    return null;
   }
 
   let expiresTime;
@@ -32,6 +32,9 @@ internals.parseTimeToMilliseconds = (date) => {
     case 'days':
       expiresTime = timeNumber * 60 * 24 * BASE_TIME;
       break;
+    default:
+      expiresTime = timeNumber * BASE_TIME;
+      break;
   }
 
   return expiresTime;
@@ -41,14 +44,13 @@ internals.parseTimeToMilliseconds = (date) => {
  * Parse time to
  *
  * @param {string} date - date string
- * @returns {undefined|number} undefined if date passed is not a string | time in milliseconds
+ * @returns {null|number} null if date passed is not a string | time in milliseconds
  * @public
  */
 const parseDate = (date) => {
-
-  if (typeof(date) !== 'string'){
-    console.error('Cannot parse a non string date');
-    return;
+  if (typeof (date) !== 'string') {
+    console.error('Cannot parse a non string date'); // eslint-disable-line no-console
+    return null;
   }
 
   return internals.parseTimeToMilliseconds(date);
