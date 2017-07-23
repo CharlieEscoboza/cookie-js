@@ -1,9 +1,18 @@
 {
   "env": {
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
   "extends": "airbnb",
+  "plugins": [
+    "chai-expect",
+    "chai-friendly"
+  ],
   "rules": {
-    "comma-dangle": ["error", "never"]
+    "chai-expect/missing-assertion": 2,
+    "chai-expect/terminating-properties": 1,
+    "chai-friendly/no-unused-expressions": 2,
+    "comma-dangle": ["error", "never"],
+    "no-unused-expressions": 0
   }
 }

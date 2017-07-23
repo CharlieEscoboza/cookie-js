@@ -11,11 +11,11 @@ const internals = {};
  * @private
  */
 internals.parseTimeToMilliseconds = (date) => {
-  const dateScale = date.match(DATE_SCALE_RE)[0] || 'mins';
+  const dateScale = date.match(DATE_SCALE_RE) ? date.match(DATE_SCALE_RE)[0] : 'mins';
   const time = date.replace(DATE_SCALE_RE, '').trim();
   const timeNumber = parseInt(time, 10);
 
-  if (isNaN(time)) {
+  if (isNaN(timeNumber)) {
     console.error('Time provided is not a number'); // eslint-disable-line no-console
     return null;
   }
@@ -24,12 +24,15 @@ internals.parseTimeToMilliseconds = (date) => {
 
   switch (dateScale) {
     case 'mins':
+    case 'min':
       expiresTime = timeNumber * BASE_TIME;
       break;
     case 'hours':
+    case 'hour':
       expiresTime = timeNumber * 60 * BASE_TIME;
       break;
     case 'days':
+    case 'day':
       expiresTime = timeNumber * 60 * 24 * BASE_TIME;
       break;
     default:
