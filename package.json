@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --config .eslintrc src/**/*.js",
+    "lint": "eslint --config .eslintrc src/**/*.js spec/**/*.js",
     "lint-fix": "eslint --fix --config .eslintrc src/**/*.js spec/**/*.js",
+    "precommit": "npm run lint-fix",
+    "prepush": "npm run test",
+    "pretest": "eslint --fix --config .eslintrc src/**/*.js spec/**/*.js",
     "test": "mocha --compilers js:babel-register --require babel-polyfill -r chai/register-expect ./spec/**/*.spec.js"
   },
   "keywords": [],
@@ -21,6 +24,7 @@
     "eslint-config-airbnb": "^15.0.2",
     "eslint-plugin-chai-expect": "^1.1.1",
     "eslint-plugin-chai-friendly": "^0.3.6",
+    "husky": "^0.14.3",
     "mocha": "^3.4.2",
     "sinon": "^2.3.7",
     "webpack": "^3.0.0"
