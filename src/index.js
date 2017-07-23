@@ -36,7 +36,11 @@ export default class Cookie {
     }
 
     if (expires) {
-      cookie += `expires=${parseDate(expires)}`;
+      const parsedDate = parseDate(expires);
+
+      if (parsedDate) {
+        cookie += `expires=${parsedDate}`;
+      }
     }
 
     document.cookie = cookie; // eslint-disable-line no-undef
